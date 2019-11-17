@@ -1,0 +1,34 @@
+import { Component } from "@angular/core";
+import { HeroServices } from "./hero.service";
+
+@Component({
+template : `
+<table border="1" width="100%">
+    	<thead>
+    		<tr>
+    			<td>Sl #</td>
+    			<td>Title</td>
+    			<td>Real Name</td>
+    			<td>More Details</td>
+    		</tr>
+    	</thead>
+    	<tbody>
+        <tr *ngFor="let hero of heroes">
+          <td>{{ hero.id }}</td>
+          <td>{{ hero.name }}</td>
+          <td>{{ hero.biography["full-name"] }}</td>
+          <td>
+            <a [routerLink]="['hero', hero.id ]">Details</a>
+          </td>
+        </tr>
+    	</tbody>
+    </table>
+
+`
+})
+export class HeroesComponent{
+    heroes = [];
+    constructor(private hd:HeroServices){ 
+      this.heroes = hd.getData().heroes;
+    } 
+}
